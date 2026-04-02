@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Enciclopedia — League of Legends</title>
+    <link type="image/x-icon" rel="shortcut icon" href="imagenes/icono.ico" />
+    <link type="text/css" rel="stylesheet" href="css/estilo2.css" />
+</head>
+<body>
+    <header class="container" role="banner">
+        <h1>Enciclopedia de League of Legends</h1>
+        <form role="search" aria-label="Buscar en la enciclopedia" method="get" action="#">
+            <label for="search" class="visually-hidden">Buscar</label>
+            <input id="search" name="q" type="search" placeholder="Buscar campeones, objetos, mapas..." />
+            <button type="submit">Buscar</button>
+        </form>
+    </header>
+
+    <nav class="container" aria-label="Navegación principal">
+        <ul>
+            <li><a href="#campeones">Campeones</a></li>
+            <li><a href="#objetos">Objetos</a></li>
+            <li><a href="#mapas">Mapas</a></li>
+            <li><a href="#historia">Historia</a></li>
+            <li><a href="#guías">Guías</a></li>
+        </ul>
+    </nav>
+
+    <main class="container" role="main">
+        <section class="hero" aria-labelledby="intro-title">
+            <h2 id="intro-title">Bienvenido a la enciclopedia</h2>
+            <p>Repositorio informativo y neutral sobre campeones, objetos, mapas y la historia del universo de League of Legends.</p>
+        </section>
+
+        <section id="campeones" aria-labelledby="campeones-title">
+            <h3 id="campeones-title">Campeón destacado</h3>
+            <article>
+                <h4>Nombre del campeón</h4>
+                <p>Descripción breve del campeón: rol, dificultad y resumen de habilidades.</p>
+                <ul>
+                    <li>Rol: (ej. Asesino / Tirador / Mago)</li>
+                    <li>Dificultad: (baja / media / alta)</li>
+                </ul>
+            </article>
+        </section>
+
+        <section id="objetos" aria-labelledby="objetos-title">
+            <h3 id="objetos-title">Objetos representativos</h3>
+            <p>Lista y descripción corta de objetos clave y su propósito en las partidas.</p>
+        </section>
+
+        <section id="mapas" aria-labelledby="mapas-title">
+            <h3 id="mapas-title">Mapas</h3>
+            <p>Resumen de los mapas jugables (grieta, ARAM, otros modos) y sus características.</p>
+        </section>
+
+        <section id="historia" aria-labelledby="historia-title">
+            <h3 id="historia-title">Lore y cronología</h3>
+            <p>Sinopsis del trasfondo del universo, facciones y eventos importantes.</p>
+        </section>
+    </main>
+
+    <footer class="container" role="contentinfo">
+        <p>&copy; Enciclopedia no oficial de League of Legends. Contenido informativo.</p>
+        <p><a href="#top">Volver arriba</a></p>
+    </footer>
+</body>
+</html>
