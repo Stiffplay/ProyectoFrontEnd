@@ -40,6 +40,34 @@ function mostrarMensajeEstado(mensajeId, texto, tipo) {
     }
 }
 
+let currentSessionEmail = null;
+let currentSessionUsername = null;
+
+function setWelcomeMessage(username) {
+    const welcome = document.getElementById('welcome-message');
+    const welcomeUser = document.getElementById('welcome-user');
+    if (welcome && welcomeUser) {
+        welcomeUser.textContent = username;
+        welcome.hidden = false;
+    }
+}
+
+function clearWelcomeMessage() {
+    const welcome = document.getElementById('welcome-message');
+    const welcomeUser = document.getElementById('welcome-user');
+    if (welcome && welcomeUser) {
+        welcomeUser.textContent = '';
+        welcome.hidden = true;
+    }
+}
+
+function activateUsernameFromEmail(email) {
+    if (currentSessionEmail && email === currentSessionEmail && currentSessionUsername) {
+        return currentSessionUsername;
+    }
+    return email.split('@')[0];
+}
+
 function activarTab(tabName) {
     const tabButtons = document.querySelectorAll('.auth-tab');
     const tabContents = document.querySelectorAll('.auth-content');
@@ -103,9 +131,10 @@ let carouselInterval = null;
 function showCarouselSlide(index) {
     if (!slides.length) return;
     currentCarouselIndex = (index + slides.length) % slides.length;
-    slides.forEach((slide, slideIndex) => {
-        slide.classList.toggle('active', slideIndex === currentCarouselIndex);
-    });
+    const track = document.querySelector('.carousel-track');
+    if (track) {
+        track.style.transform = `translateX(-${currentCarouselIndex * 100}%)`;
+    }
     dots.forEach((dot, dotIndex) => {
         dot.classList.toggle('active', dotIndex === currentCarouselIndex);
     });
@@ -176,6 +205,9 @@ if (btnCerrarSesion) {
     btnCerrarSesion.addEventListener('click', () => {
         ocultarPanelAuth();
         resetAuthForms();
+        clearWelcomeMessage();
+        currentSessionEmail = null;
+        currentSessionUsername = null;
         mostrarMensajeEstado('login_mensaje', 'Has cerrado sesión correctamente.', 'success');
         mostrarMensajeEstado('registro_mensaje', '', '');
     });
@@ -252,8 +284,14 @@ if (registroForm) {
         }
 
         if (esValido) {
+            currentSessionEmail = email;
+            currentSessionUsername = usuario;
+            setWelcomeMessage(usuario);
             mostrarMensajeEstado('registro_mensaje', `✓ Registro exitoso. ¡Bienvenido ${usuario}!`, 'success');
             registroForm.reset();
+            setTimeout(() => {
+                ocultarPanelAuth();
+            }, 800);
         } else {
             mostrarMensajeEstado('registro_mensaje', '✗ Por favor, completa correctamente todos los campos', 'error');
         }
@@ -285,11 +323,16 @@ if (loginForm) {
         }
 
         if (esValido) {
-            mostrarMensajeEstado('login_mensaje', '✓ ¡Inicio de sesión exitoso! Bienvenido.', 'success');
+            const usuarioAMostrar = activateUsernameFromEmail(email);
+            setWelcomeMessage(usuarioAMostrar);
+            mostrarMensajeEstado('login_mensaje', `✓ ¡Inicio de sesión exitoso! Bienvenido de vuelta ${usuarioAMostrar}.`, 'success');
             setTimeout(() => {
                 loginForm.reset();
                 mostrarMensajeEstado('login_mensaje', '', '');
             }, 2000);
+            setTimeout(() => {
+                ocultarPanelAuth();
+            }, 800);
         } else {
             mostrarMensajeEstado('login_mensaje', '✗ Verifica que hayas ingresado datos correctos', 'error');
         }
