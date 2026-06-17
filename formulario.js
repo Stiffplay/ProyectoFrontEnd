@@ -3,6 +3,11 @@ function validarEmail(email) {
     return regex.test(email);
 }
 
+function validarPassword(password) {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{8,}$/;
+    return regex.test(password);
+}
+
 function limpiarErrores(form) {
     const errorDivs = form.querySelectorAll('.error-message');
     errorDivs.forEach(div => {
@@ -270,8 +275,8 @@ if (registroForm) {
         if (!password) {
             mostrarError('reg_password', 'reg_password_error', 'La contraseña es obligatoria');
             esValido = false;
-        } else if (password.length < 8) {
-            mostrarError('reg_password', 'reg_password_error', 'La contraseña debe tener al menos 8 caracteres');
+        } else if (!validarPassword(password)) {
+            mostrarError('reg_password', 'reg_password_error', 'La contraseña debe tener al menos 8 caracteres, una minúscula, una mayúscula y un carácter especial');
             esValido = false;
         }
 
@@ -319,6 +324,9 @@ if (loginForm) {
 
         if (!password) {
             mostrarError('login_password', 'login_password_error', 'La contraseña es obligatoria');
+            esValido = false;
+        } else if (!validarPassword(password)) {
+            mostrarError('login_password', 'login_password_error', 'La contraseña debe tener al menos 8 caracteres, una minúscula, una mayúscula y un carácter especial');
             esValido = false;
         }
 
