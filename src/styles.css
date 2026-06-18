@@ -79,10 +79,18 @@ header h1 {
   line-height: 1.4;
 }
 
-.auth-buttons {
+.top-right-controls {
   position: absolute;
   top: 1rem;
   right: 1rem;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  z-index: 4;
+}
+
+.auth-buttons {
+  position: static;
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
@@ -90,10 +98,10 @@ header h1 {
 }
 
 @media (max-width: 480px) {
-  .auth-buttons {
+  .top-right-controls {
     position: static;
     justify-content: center;
-    margin: 1rem auto 0;
+    margin: 0.5rem auto 0;
   }
 }
 
@@ -397,6 +405,107 @@ footer a:focus-visible {
   color: var(--accent-strong);
   text-decoration: underline;
 }
+
+/* Accessibility widget styles */
+.a11y-root { position: static; }
+
+.a11y-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.a11y-trigger:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+.a11y-panel {
+  margin-top: 0.6rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  min-width: 200px;
+}
+
+.a11y-section { margin-bottom: 0.6rem; }
+.a11y-controls { display: flex; gap: 0.5rem; align-items: center; margin-top: 0.4rem; }
+.a11y-controls button { padding: 0.4rem 0.6rem; border-radius: 0.45rem; border: 1px solid var(--border); background: transparent; color: var(--text); cursor: pointer; }
+.a11y-controls button[aria-pressed="true"] { background: var(--accent); color: #081028; }
+.a11y-scale { min-width: 44px; text-align: center; }
+.a11y-actions { display:flex; justify-content:flex-end; }
+.a11y-actions button { padding: 0.4rem 0.6rem; border-radius: 0.45rem; border: 1px solid var(--border); background: transparent; color: var(--text); cursor: pointer; }
+
+/* Contrast overrides */
+body.high-contrast {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-alt: #f8f8f8;
+  --text: #000000;
+  --text-muted: #333333;
+  --accent: #0057b8;
+  --accent-strong: #003f8a;
+  --border: rgba(0,0,0,0.12);
+}
+
+body.low-contrast {
+  --text: #bfbfbf;
+  --text-muted: #9f9f9f;
+  --border: rgba(255,255,255,0.04);
+}
+
+/* Ensure key areas override hard-coded colors so contrast change is global */
+body.high-contrast header {
+  background: linear-gradient(135deg, #ffffff 0%, #f2f2f2 100%);
+  color: var(--text);
+  border-bottom: 3px solid #000000;
+}
+
+body.high-contrast nav,
+body.high-contrast .hero,
+body.high-contrast article,
+body.high-contrast .slide,
+body.high-contrast .champ-detail,
+body.high-contrast section,
+body.high-contrast .carousel {
+  background-color: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+body.high-contrast .carousel-button {
+  background: rgba(0,0,0,0.08);
+  color: var(--text);
+}
+
+body.high-contrast header h1,
+body.high-contrast article h2,
+body.high-contrast h2,
+body.high-contrast h3,
+body.high-contrast h4 {
+  color: var(--accent);
+}
+
+body.low-contrast header,
+body.low-contrast nav,
+body.low-contrast .hero,
+body.low-contrast article,
+body.low-contrast .slide,
+body.low-contrast section,
+body.low-contrast .carousel {
+  background-color: #0a0e12; /* keep darker but reduce contrast */
+  color: var(--text);
+  border-color: var(--border);
+}
+
+
 
 img {
   max-width: 100%;

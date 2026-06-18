@@ -1,3 +1,5 @@
+import AccessibilityButton from './AccessibilityButton';
+
 export default function Header({ onOpenAuth, onCloseAuth, welcome, isAuthVisible }) {
   const handleOpenAuth = (tab) => onOpenAuth(tab);
   const handleCloseAuth = () => onCloseAuth();
@@ -19,7 +21,9 @@ export default function Header({ onOpenAuth, onCloseAuth, welcome, isAuthVisible
         Bienvenido de vuelta <span id="welcome-user">{welcome.username}</span>.
       </p>
 
-      <div className="auth-buttons">
+      <div className="top-right-controls">
+        <AccessibilityButton />
+        <div className="auth-buttons">
         <button type="button" onClick={() => handleOpenAuth('registro')}>
           Registro
         </button>
@@ -29,6 +33,7 @@ export default function Header({ onOpenAuth, onCloseAuth, welcome, isAuthVisible
         <button type="button" onClick={handleCloseAuth}>
           Cerrar Sesión
         </button>
+        </div>
       </div>
     </header>
   );
