@@ -1,5 +1,4 @@
 import { validarEmail, validarPassword } from '../../utils/validators';
-import { initialRegistro } from '../../utils/constants';
 
 export default function RegistroForm({
   registro,

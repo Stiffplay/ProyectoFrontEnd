@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default function Header({ onOpenAuth, onCloseAuth, welcome, isAuthVisible }) {
   const handleOpenAuth = (tab) => onOpenAuth(tab);
   const handleCloseAuth = () => onCloseAuth();

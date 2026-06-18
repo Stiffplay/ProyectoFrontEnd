@@ -1,5 +1,3 @@
-import { validarEmail, validarPassword } from '../../utils/validators';
-
 export default function LoginForm({
   login,
   loginMessage,
