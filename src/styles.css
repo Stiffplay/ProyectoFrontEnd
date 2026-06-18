@@ -350,10 +350,11 @@ section {
   width: min(100%, 280px);
   max-height: 60vh;
   overflow: auto;
-  background-color: #0f1830;
+  background-color: var(--surface);
   padding: 1rem;
   border-radius: 0.75rem;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid var(--border);
+  color: var(--text);
 }
 
 .champ-list ol {
@@ -372,6 +373,15 @@ section {
   padding: 1.5rem;
   border-radius: 0.75rem;
   border-left: 4px solid var(--accent);
+}
+
+/* Evitar que el texto se desborde en el campeón destacado y artículos */
+section#campeones article,
+.champ-detail,
+.slide article {
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 button,
@@ -680,6 +690,36 @@ body.modal-open {
 .footer-contact h2 {
   margin-bottom: 1rem;
   color: var(--accent);
+}
+
+/* Estilos para la información del proyecto / créditos en el footer */
+.footer-meta {
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.9rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.footer-credits p {
+  margin: 0.15rem 0;
+}
+
+.footer-credits strong {
+  color: var(--accent);
+  font-weight: 700;
+  margin-right: 0.35rem;
+}
+
+@media (max-width: 640px) {
+  .footer-meta { justify-content: flex-start; text-align: left; }
+  .footer-credits { width: 100%; text-align: left; }
 }
 
 .footer-contact form {
