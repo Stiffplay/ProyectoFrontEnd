@@ -10,7 +10,7 @@ export default function Footer({
     <footer className="container" role="contentinfo">
       <p>&copy; Enciclopedia no oficial de League of Legends. Contenido informativo.</p>
 
-      <section className="footer-contact" aria-labelledby="contacto-footer-title">
+      <section id="contacto" className="footer-contact" aria-labelledby="contacto-footer-title">
         <h2 id="contacto-footer-title">Formulario de contacto</h2>
         <ContactoForm
           contacto={contacto}

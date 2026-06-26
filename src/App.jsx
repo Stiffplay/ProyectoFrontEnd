@@ -18,11 +18,13 @@ import {
 import {
   initialRegistro,
   initialLogin,
-  initialContacto
+  initialContacto,
+  championsData
 } from './utils/constants';
 
 
 function App() {
+  const [selectedChampion, setSelectedChampion] = useState(championsData[0]);
   const [isAuthVisible, setIsAuthVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('registro');
   const [welcome, setWelcome] = useState({ visible: false, username: '' });
@@ -233,8 +235,11 @@ function App() {
 
       <main className="container" role="main">
         <HeroSection />
-        <ChampionsSection />
-        <FeaturedChampion />
+        <ChampionsSection
+          selectedChampion={selectedChampion}
+          onSelectChampion={setSelectedChampion}
+        />
+        <FeaturedChampion champion={selectedChampion} />
         <ItemsSection />
         <MapsSection />
         <LoreSection />
