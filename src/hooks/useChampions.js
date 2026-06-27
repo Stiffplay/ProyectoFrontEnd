@@ -3,9 +3,16 @@ import { useState, useEffect } from 'react';
 const DDRAGON_BASE = 'https://ddragon.leagueoflegends.com/cdn/16.13.1';
 const CHAMPION_DATA_URL = `${DDRAGON_BASE}/data/es_ES/champion.json`;
 
-// Construye la URL de la imagen de carga del campeón
-export const getChampionImageUrl = (championId) =>
-  `${DDRAGON_BASE}/img/champion/loading/${championId}_0.jpg`;
+// Icono cuadrado (48x48) — para la lista del explorador
+export const getChampionIconUrl = (championId) =>
+  `${DDRAGON_BASE}/img/champion/${championId}.png`;
+
+// Splash art panorámico — para la ficha destacada
+export const getChampionSplashUrl = (championId) =>
+  `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${championId}_0.jpg`;
+
+// Alias mantenido por compatibilidad con FeaturedChampion
+export const getChampionImageUrl = getChampionSplashUrl;
 
 // Mapea las etiquetas de la API al idioma español
 const TAG_MAP = {
@@ -31,17 +38,17 @@ const transformChampion = (key, champ) => {
   const role = TAG_MAP[roleTag] ?? roleTag;
 
   return {
-    id: key,           // id exacto de la API (ej: "Ahri", "AurelionSol")
-    name: champ.name,  // nombre localizado en es_ES
+    id: key,              // id exacto de la API (ej: "Ahri", "AurelionSol")
+    name: champ.name,     // nombre localizado en es_ES
     title: champ.title,
     role,
     difficulty,
     difficultyValue,
     description: champ.blurb,
-    // Las habilidades completas requieren el endpoint individual; las omitimos aquí
-    // y se pueden cargar a demanda en FeaturedChampion
+    // Las habilidades se cargan a demanda en FeaturedChampion via useChampionDetail
     abilities: [],
-    imageUrl: getChampionImageUrl(key),
+    imageUrl: getChampionSplashUrl(key),  // splash art para la ficha
+    iconUrl: getChampionIconUrl(key),     // icono cuadrado para la lista
   };
 };
 

@@ -80,15 +80,17 @@ export default function ChampionsSection({ champions, loading, error, selectedCh
                     aria-label={`Seleccionar ${champion.name}, rol ${champion.role}`}
                     aria-pressed={selectedChampion?.id === champion.id}
                   >
-                    {/* Imagen de carga oficial de Data Dragon */}
+                    {/* Icono cuadrado oficial (48×48) de Data Dragon */}
                     <img
-                      src={champion.imageUrl}
+                      src={champion.iconUrl}
                       alt={champion.name}
                       className="champ-avatar-img"
                       loading="lazy"
                       onError={(e) => {
                         e.currentTarget.style.display = 'none';
-                        e.currentTarget.nextSibling.style.display = 'flex';
+                        if (e.currentTarget.nextSibling) {
+                          e.currentTarget.nextSibling.style.display = 'flex';
+                        }
                       }}
                     />
                     {/* Fallback con inicial si la imagen falla */}
