@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 
 export default function FeaturedChampion({ champion }) {
   const [activeAbilityIndex, setActiveAbilityIndex] = useState(0);
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   useEffect(() => {
     setActiveAbilityIndex(0);
+    setImgLoaded(false);
   }, [champion]);
 
   if (!champion) {
@@ -16,20 +18,36 @@ export default function FeaturedChampion({ champion }) {
     );
   }
 
-  const activeAbility = champion.abilities[activeAbilityIndex];
+  const activeAbility = champion.abilities?.[activeAbilityIndex];
 
   return (
     <section id="campeon-destacado" aria-labelledby="featured-champion-title" className="featured-champion-section">
       <h3 id="featured-champion-title">Ficha de Campeón</h3>
-      
+
       <article className="featured-card">
-        <div className="featured-card-header">
-          <div className="champion-badge-icon" data-role={champion.role}>
-            {champion.name[0]}
-          </div>
-          <div className="featured-card-title-area">
-            <h4>{champion.name}</h4>
-            <span className="champion-title-tagline">"{champion.title}"</span>
+        {/* ─── Imagen de carga del campeón (Data Dragon) ─── */}
+        <div className="featured-champion-img-container">
+          {!imgLoaded && (
+            <div className="featured-img-skeleton" aria-hidden="true">
+              <span className="champion-badge-icon" data-role={champion.role}>
+                {champion.name[0]}
+              </span>
+            </div>
+          )}
+          <img
+            src={champion.imageUrl}
+            alt={`Arte de carga de ${champion.name}`}
+            className={`featured-champion-img ${imgLoaded ? 'loaded' : 'hidden'}`}
+            onLoad={() => setImgLoaded(true)}
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+          <div className="featured-img-overlay" aria-hidden="true">
+            <div className="featured-card-title-area">
+              <h4>{champion.name}</h4>
+              <span className="champion-title-tagline">"{champion.title}"</span>
+            </div>
           </div>
         </div>
 
@@ -37,7 +55,7 @@ export default function FeaturedChampion({ champion }) {
           <div className="champion-meta-grid">
             <div className="meta-item">
               <strong>Rol principal:</strong>
-              <span className={`role-badge ${champion.role.toLowerCase()}`}>{champion.role}</span>
+              <span className={`role-badge ${champion.role?.toLowerCase()}`}>{champion.role}</span>
             </div>
             <div className="meta-item">
               <strong>Dificultad:</strong>
@@ -54,30 +72,41 @@ export default function FeaturedChampion({ champion }) {
 
           <p className="champion-bio">{champion.description}</p>
 
-          <div className="abilities-area">
-            <h5>Habilidades Clave</h5>
-            <div className="ability-tabs" role="tablist" aria-label="Habilidades del campeón">
-              {champion.abilities.map((ability, idx) => (
-                <button
-                  key={ability.key}
-                  type="button"
-                  role="tab"
-                  aria-selected={activeAbilityIndex === idx}
-                  className={`ability-tab-btn ${activeAbilityIndex === idx ? 'active' : ''}`}
-                  onClick={() => setActiveAbilityIndex(idx)}
-                >
-                  <span className="ability-key">{ability.key}</span>
-                </button>
-              ))}
-            </div>
-
-            {activeAbility && (
-              <div className="ability-description-box" aria-live="polite">
-                <h6>{activeAbility.name}</h6>
-                <p>{activeAbility.desc}</p>
+          {/* ─── Habilidades (si están disponibles) ─── */}
+          {champion.abilities && champion.abilities.length > 0 ? (
+            <div className="abilities-area">
+              <h5>Habilidades Clave</h5>
+              <div className="ability-tabs" role="tablist" aria-label="Habilidades del campeón">
+                {champion.abilities.map((ability, idx) => (
+                  <button
+                    key={ability.key}
+                    type="button"
+                    role="tab"
+                    aria-selected={activeAbilityIndex === idx}
+                    className={`ability-tab-btn ${activeAbilityIndex === idx ? 'active' : ''}`}
+                    onClick={() => setActiveAbilityIndex(idx)}
+                  >
+                    <span className="ability-key">{ability.key}</span>
+                  </button>
+                ))}
               </div>
-            )}
-          </div>
+
+              {activeAbility && (
+                <div className="ability-description-box" aria-live="polite">
+                  <h6>{activeAbility.name}</h6>
+                  <p>{activeAbility.desc}</p>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="abilities-area abilities-unavailable">
+              <h5>Habilidades Clave</h5>
+              <p className="abilities-note">
+                Las habilidades detalladas provienen de los datos enriquecidos en <code>constants.js</code>.
+                Los campeones de la API muestran su descripción oficial de Riot Games.
+              </p>
+            </div>
+          )}
         </div>
       </article>
     </section>

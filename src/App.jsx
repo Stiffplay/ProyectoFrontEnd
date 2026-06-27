@@ -18,13 +18,21 @@ import {
 import {
   initialRegistro,
   initialLogin,
-  initialContacto,
-  championsData
+  initialContacto
 } from './utils/constants';
+import { useChampions } from './hooks/useChampions';
 
 
 function App() {
-  const [selectedChampion, setSelectedChampion] = useState(championsData[0]);
+  const { champions, loading: champsLoading, error: champsError } = useChampions();
+  const [selectedChampion, setSelectedChampion] = useState(null);
+
+  // Selecciona el primer campeón automáticamente cuando se cargan los datos
+  useEffect(() => {
+    if (champions.length > 0 && !selectedChampion) {
+      setSelectedChampion(champions[0]);
+    }
+  }, [champions, selectedChampion]);
   const [isAuthVisible, setIsAuthVisible] = useState(false);
   const [activeTab, setActiveTab] = useState('registro');
   const [welcome, setWelcome] = useState({ visible: false, username: '' });
@@ -236,6 +244,9 @@ function App() {
       <main className="container" role="main">
         <HeroSection />
         <ChampionsSection
+          champions={champions}
+          loading={champsLoading}
+          error={champsError}
           selectedChampion={selectedChampion}
           onSelectChampion={setSelectedChampion}
         />
