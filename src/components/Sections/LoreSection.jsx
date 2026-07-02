@@ -37,6 +37,14 @@ export default function LoreSection() {
             role="tabpanel"
             aria-live="polite"
           >
+            {activeRegion.image && (
+              <img
+                src={activeRegion.image}
+                alt={`${activeRegion.name} — imagen decorativa`}
+                className="region-decor-img"
+                aria-hidden="true"
+              />
+            )}
             <h4>{activeRegion.name}</h4>
             <p className="lore-motto">"{activeRegion.motto}"</p>
             <p className="lore-description">{activeRegion.description}</p>

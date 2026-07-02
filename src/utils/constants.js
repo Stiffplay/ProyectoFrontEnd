@@ -159,6 +159,7 @@ export const itemsData = [
 export const mapsData = [
   {
     name: 'La Grieta del Invocador',
+    image: '/imagenes/Grieta del invocador.jpg',
     queueType: '5v5 Clásico',
     lanes: '3 Carriles (Superior, Medio, Inferior) y Jungla',
     description: 'El mapa competitivo estándar de League of Legends. Dos equipos de cinco jugadores luchan por destruir el Nexo enemigo. Cuenta con monstruos neutrales épicos como el Barón Nashor y los Dragones Elementales que otorgan mejoras definitivas a quienes los derrotan.',
@@ -166,6 +167,7 @@ export const mapsData = [
   },
   {
     name: 'El Abismo de los Lamentos',
+    image: '/imagenes/Abismo de los lamentos.png',
     queueType: '5v5 ARAM (All Random All Mid)',
     lanes: '1 Carril Único sin Jungla',
     description: 'Un mapa de combate constante situado en un puente helado de Freljord. Los jugadores reciben campeones completamente al azar y no pueden curarse en la base ni comprar objetos a menos que hayan muerto. Esto fomenta batallas en equipo caóticas y rápidas.',
@@ -176,24 +178,28 @@ export const mapsData = [
 export const regionsData = [
   {
     name: 'Jonia',
+    image: '/imagenes/Jonia.jpg',
     motto: 'Armonía y Equilibrio Espiritual',
     description: 'Conocida como las Tierras Primigenias, Jonia es un archipiélago de belleza salvaje donde la magia fluye por la tierra misma. Sus habitantes buscan vivir en armonía con la naturaleza y los espíritus, aunque la reciente invasión de Noxus ha forzado a muchos a adoptar el camino de la guerra y la autodefensa.',
     champions: 'Ahri, Yasuo, Zed, Irelia, Karma, Lee Sin'
   },
   {
     name: 'Demacia',
+    image: '/imagenes/Demacia.jpg',
     motto: 'Justicia, Honor y Deber',
     description: 'Un reino noble y militar con una historia orgullosa de protección de su pueblo. Fundada como un refugio contra las guerras mágicas, Demacia valora el orden, el sacrificio personal y el honor. Sin embargo, su extrema hostilidad hacia los magos ha generado tensiones internas y levantamientos civiles en los últimos tiempos.',
     champions: 'Garen, Lux, Jarvan IV, Galio, Shyvana'
   },
   {
     name: 'Noxus',
+    image: '/imagenes/Noxus.jpg',
     motto: 'Fuerza por Encima de Todo',
     description: 'Un imperio brutal y expansionista que se extiende por el centro del continente. Noxus es una sociedad meritocrática: no importa el linaje, la riqueza o el estatus social; cualquier persona puede ascender al poder si demuestra tener la fuerza y la determinación necesarias para servir al imperio.',
     champions: 'Darius, Katarina, Swain, Draven, Riven'
   },
   {
     name: 'Freljord',
+    image: '/imagenes/Freljord.jpg',
     motto: 'Sobrevivir a la Tormenta',
     description: 'Una tierra helada y despiadada donde solo los más fuertes sobreviven. Dividida por una guerra civil milenaria entre tres tribus principales lideradas por Ashe, Sejuani y Lissandra, el Freljord es hogar de criaturas colosales, guerreros indómitos y antiguos semidioses del hielo y la forja.',
     champions: 'Ashe, Sejuani, Braum, Olaf, Anivia, Ornn'

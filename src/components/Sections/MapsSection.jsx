@@ -11,6 +11,14 @@ export default function MapsSection() {
       <div className="maps-grid">
         {mapsData.map((map) => (
           <article key={map.name} className="map-card">
+            {map.image && (
+              <img
+                src={map.image}
+                alt={`${map.name} — vista decorativa`}
+                className="map-decor-img"
+                aria-hidden="true"
+              />
+            )}
             <div className="map-card-header">
               <h4>{map.name}</h4>
               <span className="map-queue-type">{map.queueType}</span>
